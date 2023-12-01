@@ -5,7 +5,7 @@ Parser to file YAML files
 '''
 import sys
 #import ruamel.yaml 
-from ruamel.yaml.scanner import ScannerError
+#from ruamel.yaml.scanner import ScannerError
 import json
 #import jsonpath_rw as jp
 # import yaml
