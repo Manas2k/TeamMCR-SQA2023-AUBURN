@@ -10,7 +10,7 @@ import os
 import pandas as pd 
 import numpy as np
 import json
-from sarif_om import *
+#from sarif_om import *
 from jschema_to_python.to_json import to_json
 
 '''Global SarifLog Object definition and Rule definition for SLI-KUBE. Rule IDs are ordered by the sequence as it appears in the TOSEM paper'''
