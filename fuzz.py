@@ -1,75 +1,79 @@
+#Author: manas Kothamasu 
+#Fuzzer
+# Team MCR
+from scanner import isValidUserName
+from scanner import isValidPasswordName
+from scanner import isValidKey
+from scanner import checkIfValidSecret
+from scanner import checkIfValidKeyValue
+import sys
 import traceback
-from typing import List,Any
 
-import numpy as np
-
-from select_repos.dev_count import getDevEmailForCommit, getDevCount
-from detection.main import runDetectionTest
-from label_perturbation_attack.loss_based_label_perturbation import label_flip_perturbation
-from generation.main import generateAttack  
-
-
-def fuzzer(method, fuzzer_args: List[Any]):
-    for fuzz in fuzzer_args:
+def doFuzz(inputList, method):
+    for inputItem in inputList:
         try:
-            result = method(*fuzzer_args)
+            result = method(inputItem)
         except Exception:
-            print(f"Fuzz: {method.__name__} Failed")
-            traceback.print_exc()
+            print("Exception in user code:")
+            print(f'Fuzz:{method.__qualname__} failed!')
+            print("-"*80)
+            traceback.print_exc(file=sys.stdout)
+            print("-"*80)
         else:
-            print("Fuzz: {method.__name__} Passed ({result})")
+            if result == True:
+                print(f'Fuzz:{method.__qualname__} passed!')
+                print(f'Detect input value is valid:')
+                print(f'Test value is {inputItem}')
+                print("-"*50)
+            else:
+                print(f'Fuzz:{method.__qualname__} passed!')
+                print(f'Detect input value is invalid:')
+                print(f'Test value is {inputItem}')
+                print("-"*50)
 
-
-if __name__ == "__main__":
-    fuzzer_list = [
-        (
-            generateAttack, [
-                (None,0),
-                (1, 22),
-                ([], {}),
-                (1.23, 4.56),
-                ("string", "SQA"),
-            ]
-        ), (
-                getDevEmailForCommit, [
-                (None, 0),
-                ("workshop", "error"),
-                ([], {}),
-                (float("inf"), float("inf")),
-                ("4l", "1i"),
-                ]
-        ),
-        (
-            getDevCount, [
-                ([]),
-                (None, 1),
-                (None, 1.0000),
-                (None, "error-argument"),
-                (None, [None, 0]),
-                (0, {})
-                
-            ]
-        ),
-        (
-            runDetectionTest, [
-                (None,),
-                (0,),
-                (1.0,),
-                ([],),
-                ({},),
-                ("",),
-            ]
-        ),
-        (
-            label_flip_perturbation, [
-                (0, 0, None,),
-                (None, None, 0,),
-                ("summer", "winter", 1.0,),
-                (float("-inf"), float("inf"), [],),
-                ([], [], {},),
-                ([], [], "break",),
-            ]
-        )
-    ]
-    for fuzz , fa in fuzzer_list:
-        fuzzer(fuzz, fa)
+def generateFuzzValues(funcName):
+    returnList = []
+    validFuncNameList = ['isValidUserName','isValidPasswordName','isValidKey',\
+                     'checkIfValidSecret', 'checkIfValidKeyValue']
+    if (isinstance(funcName, str)==False) or (funcName not in validFuncNameList):
+        print("Input function name is invalid!")
+    else:
+        if funcName == validFuncNameList[0]:
+            returnList = [0,'%',None,'group_111','domainAuCOMP',\
+                        '1234567','\\\\',\
+                        '<script\\x2Ftype=\"text/javascript\">javascript:alert(1);</script>',\
+                        '𠜎𠜱𠝹𠱓𠱸𠲖𠳏',[]]
+        elif funcName == validFuncNameList[1]:
+            returnList = [10,'_auth-__','hashTable','/',\
+                        True,None,'Null',\
+                        '<script\\x2Ftype=\"text/javascript\">javascript:alert(1);</script>',\
+                        '0,0/0,0',{}]
+        elif funcName == validFuncNameList[2]:
+            returnList = [10,'crt_auth-__','key:hashTable','key/',\
+                        True,None,'Null',\
+                        '<script\\x2Ftype=\"text/javascript\">javascript:alert(1);</script>',\
+                        '0,0/0,0',{}]
+        elif funcName == validFuncNameList[3]:
+            returnList = [10,'unset_auth-__','key:hashTable','/',\
+                        True,None,'undefined',\
+                        '<script\\x2Ftype=\"text/javascript\">javascript:alert(1);</script>',\
+                        '0,0/0,0',[]]
+        elif funcName == validFuncNameList[4]:
+            returnList = [0,'-----BEGIN RSA PRIVATE KEY-----crt_auth-__','key:hashTable','key/',\
+                        True,None,'Null',\
+                        '<script\\x2Ftype=\"text/javascript\">-----BEGIN CERTIFICATE-----</script>',\
+                        '0,0/0,0',{}]
+        else:
+            print("Input function name is invalid!")
+    return returnList
+if __name__=="__main__":
+    method = [isValidUserName,isValidPasswordName,isValidKey,\
+            checkIfValidSecret, checkIfValidKeyValue]
+    testFuncCount = 1
+    for funcNameDenote in method:
+        print("*"*50)   
+        print(" "*10,f'{testFuncCount}.{funcNameDenote.__qualname__}:')
+        print("*"*50)
+        returnedList = generateFuzzValues(funcNameDenote.__qualname__)
+        doFuzz(returnedList, funcNameDenote)
+        testFuncCount+=1
