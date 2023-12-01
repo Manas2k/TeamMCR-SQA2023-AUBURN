@@ -49,7 +49,7 @@ def generateFuzzValues(funcName):
                         '0xabad1dea',\
                         '<>?:\"{}|_+',{}]
         elif funcName == validFuncNameList[2]:
-            returnList = [10,'LPT1','$ENV{'HOME'}','`ls -al /`',\
+            returnList = [10,'LPT1','$ENV{HOME}','`ls -al /`',\
                          True,None,'CLOCK$',\
                          '<foo val=“bar” />',\
                          '!@#$%^&*()`~',{} ]
