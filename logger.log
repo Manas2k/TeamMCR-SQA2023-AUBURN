@@ -1,0 +1,33 @@
+logger-2023-12-01 14:37:52,425 - 2460 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:38:09,393 - 2489 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:38:44,435 - 2514 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:39:21,039 - 2544 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:39:50,279 - 2562 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:40:00,627 - 2581 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:40:50,137 - 2604 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:40:50,340 - 2604 -ERROR- LOG : Error in file main.py
+NoneType: None
+logger-2023-12-01 14:41:24,221 - 2621 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:41:24,431 - 2621 -ERROR- LOG : Error in file main.py
+NoneType: None
+logger-2023-12-01 14:41:24,431 - 2621 -WARNING- LOG :chance of poisoning attack in file main.py
+logger-2023-12-01 14:41:53,571 - 2638 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:41:53,770 - 2638 -ERROR- LOG : Error in file main.py
+NoneType: None
+logger-2023-12-01 14:41:53,770 - 2638 -WARNING- LOG :chance of poisoning attack in file main.py
+logger-2023-12-01 14:42:15,574 - 2656 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:42:15,786 - 2656 -ERROR- LOG : Error in file main.py
+NoneType: None
+logger-2023-12-01 14:42:15,786 - 2656 -WARNING- LOG :chance of poisoning attack in file main.py
+logger-2023-12-01 14:42:24,180 - 2673 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:42:24,386 - 2673 -ERROR- LOG : Error in file main.py
+NoneType: None
+logger-2023-12-01 14:42:24,387 - 2673 -WARNING- LOG :chance of poisoning attack in file main.py
+logger-2023-12-01 14:42:52,772 - 2687 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:43:44,141 - 2711 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:44:13,104 - 2725 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:44:23,394 - 2746 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:45:14,656 - 2810 -INFO- LOG : Executing graphtaint.py
+logger-2023-12-01 14:45:57,793 - 2835 -INFO- LOG : Opening YAML file at path '{script_}'
+logger-2023-12-01 14:48:54,587 - 2911 -INFO- LOG : Opening YAML file at path '{script_}'
+#sample comment to upload
