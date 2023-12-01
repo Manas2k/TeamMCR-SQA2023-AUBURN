@@ -39,30 +39,30 @@ def generateFuzzValues(funcName):
         print("Input function name is invalid!")
     else:
         if funcName == validFuncNameList[0]:
-            returnList = [0,'%',None,'group_111','domainAuCOMP',\
-                        '1234567','\\\\',\
-                        '<script\\x2Ftype=\"text/javascript\">javascript:alert(1);</script>',\
-                        '𠜎𠜱𠝹𠱓𠱸𠲖𠳏',[]]
+            returnList = [0,'undefined',None,'undef','null',\
+                        'NULL','nil',\
+                        'true',\
+                        'hasOwnProperty',[]]
         elif funcName == validFuncNameList[1]:
-            returnList = [10,'_auth-__','hashTable','/',\
-                        True,None,'Null',\
-                        '<script\\x2Ftype=\"text/javascript\">javascript:alert(1);</script>',\
-                        '0,0/0,0',{}]
+            returnList = [10,'1E02','-2147483648/-1','-0',\
+                        True,None,'1#IND',\
+                        '0xabad1dea',\
+                        '<>?:\"{}|_+',{}]
         elif funcName == validFuncNameList[2]:
-            returnList = [10,'crt_auth-__','key:hashTable','key/',\
-                        True,None,'Null',\
-                        '<script\\x2Ftype=\"text/javascript\">javascript:alert(1);</script>',\
-                        '0,0/0,0',{}]
+            returnList = [10,'LPT1','$ENV{'HOME'}','`ls -al /`',\
+                         True,None,'CLOCK$',\
+                         '<foo val=“bar” />',\
+                         '!@#$%^&*()`~',{} ]
         elif funcName == validFuncNameList[3]:
-            returnList = [10,'unset_auth-__','key:hashTable','/',\
-                        True,None,'undefined',\
-                        '<script\\x2Ftype=\"text/javascript\">javascript:alert(1);</script>',\
-                        '0,0/0,0',[]]
+            returnList = [10,'⅛⅜⅝⅞','ÅÍÎÏ˝ÓÔÒÚÆ☃','œ∑´®†¥¨ˆøπ“‘',\
+                        True,None,'和製漢語',\
+                        '울란바토르',\
+                        '( ͡° ͜ʖ ͡°)',[]]
         elif funcName == validFuncNameList[4]:
-            returnList = [0,'-----BEGIN RSA PRIVATE KEY-----crt_auth-__','key:hashTable','key/',\
-                        True,None,'Null',\
-                        '<script\\x2Ftype=\"text/javascript\">-----BEGIN CERTIFICATE-----</script>',\
-                        '0,0/0,0',{}]
+            returnList = [0,'﷽','<img src=x onerror=alert(123) />','http://a/%%30%30',\
+                        True,None,'<plaintext>',\
+                        '--version',\
+                        '/dev/null; touch /tmp/blns.fail ; echo',{}]
         else:
             print("Input function name is invalid!")
     return returnList
