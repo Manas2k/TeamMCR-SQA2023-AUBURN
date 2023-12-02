@@ -11,7 +11,7 @@ def run_bandit_and_report():
         writer = csv.writer(csvfile)
         # Write the header
         writer.writerow(['Filename', 'Line', 'Test Name', 'Issue Severity', 'Issue Confidence', 'Issue Text'])
-        # Write the analysis results
+        # Write the analysis result
         for line in result.stdout.splitlines():
             writer.writerow(line.split(','))
 
