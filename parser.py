@@ -14,6 +14,7 @@ import pathlib as pl
 import re
 import subprocess
 import os
+import logging_4c
 
 #update basepath
 base_path = r" "
@@ -113,7 +114,9 @@ def getValsFromKey(dict_, target, list_holder  ):
     '''
     If you give a key, then this function gets the corresponding values 
     Multiple values are returned if there are keys with the same name  
-    '''    
+    ''' 
+    logObj = logging_4c.giveMeLoggingObject()
+    logObj.info('LOG : Executing getValsFromKey with parameters in parser.py: dict_=%s, target=%s, list_holder=%s', dict_, target, list_holder)   
     if ( isinstance( dict_, dict ) ):
         for key, value in dict_.items():
             # print( key, len(key) , target, len( target ), value  )
@@ -135,6 +138,8 @@ def checkIfValidHelm(path_script):
 def readYAMLAsStr( path_script ):
     yaml_as_str = constants.YAML_SKIPPING_TEXT
     with open( path_script , constants.FILE_READ_FLAG) as file_:
+        logObj = logging_4c.giveMeLoggingObject()
+        logObj.error("LOG : Error reading YAML file at path '{path_script}': {str(e)}")
         yaml_as_str = file_.read()
     return yaml_as_str
 
@@ -159,6 +164,9 @@ def checkParseError( path_script ):
 
 def loadMultiYAML( script_ ):
     dicts2ret = []  
+    #to indicate that we are about to open the YAML file specified by script.
+    logObj = logging_4c.giveMeLoggingObject()
+    logObj.info("LOG : Opening YAML file at path '{script_}'")
     with open(script_, constants.FILE_READ_FLAG  ) as yml_content :
         yaml = ruamel.yaml.YAML()
         yaml.default_flow_style = False      
@@ -166,12 +174,21 @@ def loadMultiYAML( script_ ):
             for d_ in yaml.load_all(yml_content) :                
                 # print('='*25)
                 # print(d_)
+                # to indicate that we are processing each dictionary in the YAML file. 
+                logObj = logging_4c.giveMeLoggingObject()
+                logObj.debug("LOG : Processing dictionary in YAML file in method loadMultiYAML - parser.py")
                 dicts2ret.append( d_ )
         except ruamel.yaml.parser.ParserError as parse_error:
+            #to indicate that an error has occurred while processing the YAML file.
+            logObj = logging_4c.giveMeLoggingObject()
+            logObj.error("LOG : Error reading YAML file at path '{script_}': {exc}")
             print(constants.YAML_SKIPPING_TEXT)           
         except ruamel.yaml.error.YAMLError as exc:
             print( constants.YAML_SKIPPING_TEXT  )    
         except UnicodeDecodeError as err_: 
+            #to indicate that an error has occurred while processing the YAML file.
+            logObj = logging_4c.giveMeLoggingObject()
+            logObj.error("LOG : Error reading YAML file at path '{script_}': {exc}")
             print( constants.YAML_SKIPPING_TEXT  )
         
         path = find_json_path_keys(dicts2ret)
@@ -366,6 +383,9 @@ def getSingleDict4MultiDocs( lis_dic ):
     dict2ret = {} 
     key_lis  = []
     counter  = 0 
+    # to indicate that we are starting to process multiple dictionaries.
+    logObj = logging_4c.giveMeLoggingObject()
+    logObj.info("LOG : Processing multiple dictionaries to create a single dictionary in getSingleDict4MultiDocs - parser.py")
     for dic in lis_dic:
         # print(dic)
         # print('='*100) dic = dic[0]

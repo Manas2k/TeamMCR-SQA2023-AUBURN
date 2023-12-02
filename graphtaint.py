@@ -7,7 +7,10 @@ import constants
 import parser 
 import os 
 from itertools import combinations
-
+import logging_4c
+# initiated logging
+logObj = logging_4c.giveMeLoggingObject()
+logObj.info('LOG : Executing graphtaint.py')
 def getYAMLFiles(path_to_dir):
     valid_  = [] 
     for root_, dirs, files_ in os.walk( path_to_dir ):

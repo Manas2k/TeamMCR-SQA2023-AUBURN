@@ -12,6 +12,7 @@ import numpy as np
 import json
 from sarif_om import *
 from jschema_to_python.to_json import to_json
+import logging_4c
 
 '''Global SarifLog Object definition and Rule definition for SLI-KUBE. Rule IDs are ordered by the sequence as it appears in the TOSEM paper'''
 
@@ -736,7 +737,7 @@ def runScanner(dir2scan):
         #print(sarif_json)       
 
 
-    return all_content, sarif_json
+    return all_content
 
 
 def scanForHostNetwork(path_script ):
@@ -1007,6 +1008,4 @@ def scanForUnconfinedSeccomp(path_script ):
 if __name__ == '__main__':
     #provide directory to scan
     dir2scan = r'C:\Users\..'
-    a,b = runScanner(dir2scan)
-    with open("test-scanner.sarif", "w") as f:
-        f.write(b)
+    #a,b = runScanner(dir2scan)
